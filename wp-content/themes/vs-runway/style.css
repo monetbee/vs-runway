@@ -550,10 +550,25 @@ select {
   }
 }
 
-/* スマホ対応 */
-@media (max-width: 768px) {
-  .hero-section {
-    height: 60vh;
-    padding: 0 5%;
-  }
+/* 1. 全体のはみ出し・横揺れを完全に防ぐ */
+html, body {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 2. メイン画像のフィット設定 */
+.hero-section {
+  width: 100% !important;
+  height: 80vh !important;
+  min-height: 500px !important;
+  background-size: cover !important;       /* 全体を埋める */
+  background-position: center !important;  /* 中央合わせ */
+  background-repeat: no-repeat !important;
 }
