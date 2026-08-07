@@ -550,9 +550,10 @@ select {
   }
 }
 
+/* スマホ対応 */
 @media (max-width: 768px) {
   .hero-section {
-    height: 50vh;                  /* スマホでは高さを抑える */
-    padding: 40px 5%;
+    height: 60vh;
+    padding: 0 5%;
   }
 }
