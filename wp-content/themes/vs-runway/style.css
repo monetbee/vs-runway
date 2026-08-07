@@ -128,7 +128,7 @@ select {
   /* --- レイアウト（既存のままでOK） --- */
   display: flex;
   align-items: center;
-  padding: 60px 10%;
+  padding: 60px 0;
 }
 
 /* 背景画像の上に薄い黒フィルターを重ねて文字を読みやすくする */
