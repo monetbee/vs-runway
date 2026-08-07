@@ -20,20 +20,20 @@
   --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
 }
 
-* {
-  box-sizing: border-box; /* パディングを含めた幅計算にする */
+/* --- 1. リセット & 横揺れ（横スクロール）完全防止 --- */
+*, *::before, *::after {
+  box-sizing: border-box !important;
 }
 
 html, body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden; /* 横スクロールを強制的に禁止 */
-  margin: 0;
-  padding: 0;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 body {
-  margin: 0;
   min-height: 100vh;
   color: var(--text);
   background: radial-gradient(circle at top, #141414 0%, var(--bg) 40%, #070707 100%);
@@ -52,15 +52,14 @@ a {
   text-decoration: none;
 }
 
-button,
-input,
-textarea,
-select {
+button, input, textarea, select {
   font: inherit;
 }
 
+/* --- 2. レイアウト全体 --- */
 .site-shell {
-  width: min(1240px, 100%);
+  width: 100%;
+  max-width: 1240px;
   margin: 0 auto;
   padding: 32px 24px 48px;
 }
@@ -118,32 +117,34 @@ select {
   color: var(--accent);
 }
 
+/* --- 3. ヒーローエリア（背景画像 & フィット設定） --- */
 .hero-section {
-  width: 100%;
-  height: 80vh;                    /* 画面高さの80% */
-  min-height: 500px;
+  position: relative;
+  width: 100% !important;
+  height: 80vh !important;
+  min-height: 500px !important;
+  margin: 32px 0 64px 0;
   
-  background-size: cover;          /* 画像を画面いっぱいに比率を保ってフィット */
-  background-position: center;     /* 中央基準 */
-  background-repeat: no-repeat;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
   
-  display: flex;
+  display: flex !important;
   align-items: center;
-  justify-content: flex-start;     /* 左側のテキスト位置をキープ */
-  padding: 0 8%;                   /* 画面端から少し離す適切な余白 */
+  justify-content: flex-start;
+  padding: 0 8% !important;
+  border-radius: 28px;
+  overflow: hidden;
 }
 
-
-/* 背景画像の上に薄い黒フィルターを重ねて文字を読みやすくする */
 .hero-section::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(13, 13, 13, 0.4), rgba(13, 13, 13, 0.8));
+  background: linear-gradient(180deg, rgba(13, 13, 13, 0.2), rgba(13, 13, 13, 0.85));
   pointer-events: none;
 }
 
-/* テキストをフィルターの前面に出す */
 .hero-copy {
   max-width: 600px;
   position: relative;
@@ -183,6 +184,7 @@ select {
   border-radius: 999px;
 }
 
+/* --- 4. ボタンパーツ --- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -220,37 +222,7 @@ select {
   box-shadow: 0 20px 50px rgba(255, 105, 180, 0.25);
 }
 
-.hero-media {
-  display: none;
-}
-
-.hero-section {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 32px;
-  align-items: center;
-  min-height: 80vh;
-  margin: 64px 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-}
-
-.hero-section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(13, 13, 13, 0.18), rgba(13, 13, 13, 0.92));
-  pointer-events: none;
-}
-
-.hero-copy {
-  max-width: 600px;
-  position: relative;
-  z-index: 1;
-}
-
+/* --- 5. 各セクション & カード類 --- */
 .section-header {
   margin-bottom: 40px;
 }
@@ -276,8 +248,7 @@ select {
 .event-card,
 .lookbook-card,
 .product-card,
-.story-panel,
-.story-visual {
+.story-panel {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 28px;
@@ -289,7 +260,6 @@ select {
   position: relative;
   overflow: hidden;
   color: #ffffff;
-  border-radius: 28px;
 }
 
 .event-card .card-media {
@@ -339,16 +309,11 @@ select {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.lookbook-card,
-.collection-card {
+.lookbook-card {
   overflow: hidden;
 }
 
-.lookbook-card .card-media,
-.collection-image-1,
-.collection-image-2,
-.collection-card .collection-image,
-.story-image {
+.lookbook-card .card-media {
   min-height: 340px;
   background-size: cover;
   background-position: center;
@@ -357,77 +322,21 @@ select {
 }
 
 .lookbook-card .card-media img,
-.product-media img,
-.hero-media img {
+.product-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.story-image {
-  min-height: 540px;
-  border-radius: 32px;
-  overflow: hidden;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: transform 0.5s ease;
-}
-
-.story-image:hover,
-.lookbook-card:hover .card-media,
-.collection-card:hover .collection-image {
+.lookbook-card:hover .card-media {
   transform: scale(1.05);
 }
 
 .card-copy,
-.collection-copy,
 .product-content,
 .story-panel {
   padding: 28px;
-}
-
-.lookbook-card h3,
-.collection-copy h3,
-.product-card h3 {
-  margin-bottom: 18px;
-}
-
-.collection-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.collection-card {
-  display: grid;
-  grid-template-rows: auto 1fr;
-}
-
-.collection-copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-}
-
-.collection-image-1 {
-  background-image: url('https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1200&q=80');
-}
-
-.collection-image-2 {
-  background-image: url('https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=1200&q=80');
-}
-
-.card-media.look1 {
-  background-image: url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80');
-}
-
-.card-media.look2 {
-  background-image: url('https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=1200&q=80');
-}
-
-.card-media.look3 {
-  background-image: url('https://images.unsplash.com/photo-1520975912906-2b0c8f1a3b6e?auto=format&fit=crop&w=1200&q=80');
 }
 
 .product-grid {
@@ -438,11 +347,7 @@ select {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
- 
-.product-card {
   overflow: hidden;
-  border-radius: 20px;
 }
 
 .product-media {
@@ -450,7 +355,6 @@ select {
   position: relative;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
 }
 
 .product-media::after {
@@ -473,6 +377,7 @@ select {
   font-weight: 700;
 }
 
+/* --- 6. STORY セクション --- */
 .story-section {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -491,8 +396,16 @@ select {
   min-height: 540px;
   border-radius: 32px;
   overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
 }
 
+.story-image:hover {
+  transform: scale(1.05);
+}
+
+/* --- 7. フッター --- */
 .site-footer {
   margin-top: 96px;
   padding-top: 32px;
@@ -507,8 +420,8 @@ select {
   gap: 10px;
 }
 
+/* --- 8. レスポンシブ（スマホ・タブレット対応） --- */
 @media (max-width: 1024px) {
-  .hero-section,
   .story-section {
     grid-template-columns: 1fr;
   }
@@ -538,6 +451,11 @@ select {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
+  .hero-section {
+    height: 60vh !important;
+    padding: 0 5% !important;
+  }
+
   .hero-title,
   .site-title,
   .section-header h2,
@@ -548,27 +466,4 @@ select {
   .btn {
     width: 100%;
   }
-}
-
-/* 1. 全体のはみ出し・横揺れを完全に防ぐ */
-html, body {
-  width: 100% !important;
-  max-width: 100% !important;
-  overflow-x: hidden !important;
-  margin: 0;
-  padding: 0;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-/* 2. メイン画像のフィット設定 */
-.hero-section {
-  width: 100% !important;
-  height: 80vh !important;
-  min-height: 500px !important;
-  background-size: cover !important;       /* 全体を埋める */
-  background-position: center !important;  /* 中央合わせ */
-  background-repeat: no-repeat !important;
 }
