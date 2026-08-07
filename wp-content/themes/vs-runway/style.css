@@ -116,19 +116,24 @@ select {
 
 .hero-section {
   /* --- 画像をぴったり収める設定 --- */
-  background-size: cover;          /* エリア全体を埋めるようにトリミング */
-  background-position: center;     /* 画像の中央を基準にする */
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   
   /* --- サイズと高さの設定 --- */
   width: 100%;
-  height: 70vh;                    /* 画面高さの70%にする（お好みで 500px などに変更OK） */
-  min-height: 400px;               /* 小さくなりすぎ防止 */
+  height: 70vh;
+  min-height: 400px;
 
-  /* --- レイアウト（既存のままでOK） --- */
+  /* --- レイアウト調整 --- */
   display: flex;
-  align-items: center;
-  padding: 0; margin: 0 }
+  align-items: center;            /* 縦方向の中央揃え */
+  justify-content: center;        /* ★追加：横方向の中央揃え（これで全体が真ん中にきます） */
+  
+  padding: 0 5%;                  /* ★変更：画面端に文字がくっつかないよう左右に少しだけ余白をつくる */
+  margin: 0;
+  box-sizing: border-box;         /* ★追加：paddingを含めた全体幅を100%に固定する */
+}
 
 
 /* 背景画像の上に薄い黒フィルターを重ねて文字を読みやすくする */
