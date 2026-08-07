@@ -129,10 +129,22 @@ select {
   background-position: center;        /* 中央を基準にする */
   background-repeat: no-repeat;
   
-  /* テキストの配置調整 */
+  width: 100%;
+  height: 60vh;                    /* 画面高さの60%（好みの高さに変更OK） */
+  min-height: 400px;               /* 画面が小さくても小さくなりすぎない保証 */
+  position: relative;              /* ::after フィルターの位置基準 */
+
+  /* レイアウト調整（既存） */
   display: flex;
   align-items: center;
-  padding: 60px 10%;                  /* 端に寄りすぎないよう左右にパディングを入れる */
+  padding: 60px 10%;
+
+  @media (max-width: 768px) {
+  .hero-section {
+    height: 50vh;                  /* スマホ画面では少し高さを抑える */
+    padding: 40px 5%;              /* スマホ用に余白を少し詰める */
+  }
+
 }
 
 /* 背景画像の上に薄い黒フィルターを重ねて文字を読みやすくする */
@@ -549,4 +561,5 @@ select {
   .btn {
     width: 100%;
   }
+}
 }
