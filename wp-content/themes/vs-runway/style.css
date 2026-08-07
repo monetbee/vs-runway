@@ -114,37 +114,23 @@ select {
   color: var(--accent);
 }
 
-/* 画面幅いっぱいに突き破って背景を広げる設定 */
 .hero-section {
-  position: relative;
-  width: 100vw;                       /* 画面の横幅いっぱいに指定 */
-  margin-left: calc(50% - 50vw);      /* 親要素 (.site-shell) の幅制限を無視して画面端まで広げる */
-  margin-right: calc(50% - 50vw);
-  margin-top: 0;
-  margin-bottom: 64px;
-  min-height: 80vh;                   /* 画面の高さ80%分を確保 */
-  
-  /* 背景画像の設定 */
-  background-size: cover;             /* 縦横比を保ちつつ画面全体に fit させる */
-  background-position: center;        /* 中央を基準にする */
-  background-repeat: no-repeat;
-  
+  /* ▼ ここから追加・修正 ▼ */
   width: 100%;
-  height: 60vh;                    /* 画面高さの60%（好みの高さに変更OK） */
-  min-height: 400px;               /* 画面が小さくても小さくなりすぎない保証 */
-  position: relative;              /* ::after フィルターの位置基準 */
+  height: 60vh;                    /* 画面高さの60% */
+  min-height: 400px;               /* 小さくなりすぎない保証 */
+  position: relative;
+  
+  background-size: cover;          /* ★ここを修正（フィットさせる） */
+  background-position: center;     /* 中央を基準に */
+  background-repeat: no-repeat;
+  /* ▲ ここまでを追加・修正 ▲ */
 
-  /* レイアウト調整（既存） */
+  /* --- 以下の既存レイアウト調整はそのまま --- */
   display: flex;
   align-items: center;
   padding: 60px 10%;
-
-  @media (max-width: 768px) {
-  .hero-section {
-    height: 50vh;                  /* スマホ画面では少し高さを抑える */
-    padding: 40px 5%;              /* スマホ用に余白を少し詰める */
-  }
-
+  margin-bottom: 64px;
 }
 
 /* 背景画像の上に薄い黒フィルターを重ねて文字を読みやすくする */
@@ -562,4 +548,10 @@ select {
     width: 100%;
   }
 }
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 50vh;                  /* スマホでは高さを抑える */
+    padding: 40px 5%;
+  }
 }
