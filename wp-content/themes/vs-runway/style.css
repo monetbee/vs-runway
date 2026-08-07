@@ -128,8 +128,8 @@ select {
   /* --- レイアウト（既存のままでOK） --- */
   display: flex;
   align-items: center;
-  padding: 0;
-}
+  padding: 0; margin: 0 }
+
 
 /* 背景画像の上に薄い黒フィルターを重ねて文字を読みやすくする */
 .hero-section::after {
