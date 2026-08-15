@@ -59,9 +59,9 @@ button, input, textarea, select {
 /* --- 2. レイアウト全体 --- */
 .site-shell {
   width: 100%;
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 32px 24px 48px;
+  max-width: none;
+  margin: 0;
+  padding: 0;
 }
 
 .site-header {
@@ -451,10 +451,24 @@ button, input, textarea, select {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .hero-section {
-    height: 60vh !important;
-    padding: 0 5% !important;
-  }
+.hero-section {
+  position: relative;
+  width: 100% !important;
+  height: 80vh !important;
+  min-height: 500px !important;
+  margin: 32px 0 64px 0;
+
+  background-size: cover !important;
+  background-position: 40% center !important;
+  background-repeat: no-repeat !important;
+
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 8% !important;
+  border-radius: 28px;
+  overflow: hidden;
+}
 
   .hero-title,
   .site-title,
