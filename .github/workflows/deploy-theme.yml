@@ -1,0 +1,50 @@
+name: Deploy VS Runway Theme
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'wp-content/themes/vs-runway/**'
+      - '.github/workflows/deploy-theme.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare theme files
+        shell: bash
+        run: |
+          rm -rf deploy
+          mkdir -p deploy
+
+          # WordPress theme root files currently live in css&php.
+          cp -R 'wp-content/themes/vs-runway/css&php/.' deploy/
+
+          # Copy asset directories used by the theme.
+          if [ -d 'wp-content/themes/vs-runway/assets' ]; then
+            cp -R 'wp-content/themes/vs-runway/assets' deploy/assets
+          fi
+          if [ -d 'wp-content/themes/vs-runway/js' ]; then
+            cp -R 'wp-content/themes/vs-runway/js' deploy/js
+          fi
+
+          # Remove macOS metadata if present.
+          find deploy -name '.DS_Store' -delete
+          find deploy -name '__MACOSX' -type d -prune -exec rm -rf {} + 2>/dev/null || true
+
+      - name: Deploy theme to InfinityFree
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ftpupload.net
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./deploy/
+          server-dir: /htdocs/wp-content/themes/vs-runway/
