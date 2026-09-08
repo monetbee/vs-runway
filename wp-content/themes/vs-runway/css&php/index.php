@@ -30,7 +30,7 @@
     </header>
 
     <main>
-      <section id="hero" class="hero-section" style="background-image: url('<?php echo esc_url( get_theme_file_uri( '/assets/IMG_2644.jpeg' ) ); ?>');">
+      <section id="hero" class="hero-section" style="background-image: url('<?php echo esc_url( get_theme_file_uri( '/assets/video.mp4' ) ); ?>');">
         <div class="hero-copy">
           <span class="hero-pretitle">THE 2026 Shhh...Collection SHOW</span>
           <h2 class="hero-title">SEXY CUTE LINGERIE<br>MEETS HAUTE COUTURE</h2>
