@@ -47,4 +47,4 @@ jobs:
           protocol: ftps
           port: 21
           local-dir: ./deploy/
-          server-dir: /htdocs/wp-content/themes/vs-runway/
+          server-dir: htdocs/wp-content/themes/vs-runway/
